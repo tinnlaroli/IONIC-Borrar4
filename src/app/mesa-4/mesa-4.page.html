@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>mesa_4</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-select
+      label="Default label"
+      placeholder="Sabores"
+      [(ngModel)]="selectedPizza"
+    >
+      <ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+      <ion-select-option value="hawaiiana">Hawaiiana</ion-select-option>
+      <ion-select-option value="carnesfrias">Carnes frias</ion-select-option>
+      <ion-select-option value="mexicana">Mexicana</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" (click)="oredenarPizza()">Oredenar</ion-button>
+
+  <h1 class="ion-padding">Mis pedidos</h1>
+
+  <ion-list>
+    <ion-item-sliding
+      *ngFor="let pedido of pedidos"
+      #slidingItem
+      (ionSwipe)="confirmarEliminacion(slidingItem, pedido)"
+    >
+      <ion-item>
+        <ion-label>
+          {{ pedido.pizza }}
+          <p>Pedido: {{ pedido.id }}</p>
+        </ion-label>
+        <p>{{ pedido.mesa }}</p>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option
+          color="danger"
+          expandable
+          (click)="confirmarEliminacion(slidingItem, pedido)"
+        >
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

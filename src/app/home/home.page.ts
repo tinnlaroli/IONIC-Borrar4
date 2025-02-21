@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PizzeriaService } from '../services/pizzeria.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  totalPedidos: number = 0;
 
+  constructor( 
+  private pizzeriaService: PizzeriaService
+  ) {}
+
+  ngOnInit() {
+  }
+  ionViewWillEnter() {
+    console.log('homepage ngOnInit');
+    this.totalPedidos = this.pizzeriaService.obtenerTotalPedidos();
+  }
 }
