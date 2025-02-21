@@ -20,8 +20,14 @@ export class Mesa2Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.pedidos = this.pizzeria.obtenerPedidos();
+    this.actualizarPedidos();
+//    this.pedidos = this.pizzeria.obtenerPedidos();
   }
+
+// Método para actualizar la lista de pedidos según la mesa
+actualizarPedidos() {
+  this.pedidos = this.pizzeria.obtenerPedidos().filter(p => p.mesa === this.selectedMesa);
+}
 
   // Método para agregar un pedido
   oredenarPizza() {
@@ -43,6 +49,7 @@ export class Mesa2Page implements OnInit {
       mesa: this.selectedMesa,
     };
     this.pizzeria.agregarPedido(pedido);
+    this.actualizarPedidos();
   }
 
   // Método para generar un ID único y bonito
@@ -88,6 +95,6 @@ export class Mesa2Page implements OnInit {
   eliminarPedido(slidingItem: IonItemSliding, pedido: Pedido) {
     slidingItem.close();
     this.pizzeria.eliminarPedido(pedido);
-    this.pedidos = this.pizzeria.obtenerPedidos();
+    this.actualizarPedidos();
   }
 }

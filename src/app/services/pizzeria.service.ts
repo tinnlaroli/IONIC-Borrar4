@@ -25,5 +25,9 @@ export class PizzeriaService {
   obtenerTotalPedidos() {
     return this.pedidos.length;
   }
+
+  // obtenerPedidosPorMesa(pedido : Pedido) {
+  //   return this.pedidos.filter(p => p.mesa === pedido.mesa);
+  //}
 }
 
